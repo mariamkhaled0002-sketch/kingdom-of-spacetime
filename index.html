@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   مملكة الزمكان | الدخول
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+
+ <body class="auth-page">
+  <div class="auth-bg">
+  </div>
+  <main class="auth-wrap">
+   <section class="brand">
+    <div class="brand-emblem">
+     ⌛
+    </div>
+    <h1>
+     مملكة الزمكان
+    </h1>
+    <p>
+     رحلة تفاعلية عبر تاريخ مصر
+    </p>
+    <div class="brand-line">
+    </div>
+   </section>
+   <section class="auth-card">
+    <div class="tabs">
+     <button class="tab active" id="loginTab">
+      تسجيل الدخول
+     </button>
+     <button class="tab" id="registerTab">
+      إنشاء حساب
+     </button>
+    </div>
+    <form class="auth-form" id="loginForm">
+     <h2>
+      مرحبًا بعودتك 👑
+     </h2>
+     <p class="muted">
+      استكمل رحلتك من حيث توقفت.
+     </p>
+
+     <label>
+      اسم المستخدم أو البريد
+      <input autocomplete="username" id="loginUsername" required=""/>
+     </label>
+
+     <label>
+      كلمة المرور
+      <input autocomplete="current-password" id="loginPassword" required="" type="password"/>
+     </label>
+
+     <div class="remember">
+      <label class="check">
+       <input id="rememberMe" type="checkbox"/>
+       <span>
+        تذكرني
+       </span>
+      </label>
+      <button class="link-btn" id="forgotPassword" type="button">
+       نسيت كلمة المرور؟
+      </button>
+     </div>
+
+     <button class="gold-btn" type="submit">
+      دخول إلى المملكة
+      <span>
+       ←
+      </span>
+     </button>
+
+     <div class="form-message" id="loginMessage">
+     </div>
+    </form>
+    <form class="auth-form hidden" id="registerForm">
+     <h2>
+      أنشئ مملكتك ✨
+     </h2>
+     <p class="muted">
+      سجّل بياناتك واحفظ تقدمك محليًا.
+     </p>
+     <label>
+      الاسم
+      <input id="registerName" required=""/>
+     </label>
+
+     <label>
+      البريد الإلكتروني
+      <input id="registerEmail" required="" type="email"/>
+     </label>
+
+     <label>
+      كلمة المرور
+      <input id="registerPassword" minlength="4" required="" type="password"/>
+     </label>
+
+     <label>
+      تأكيد كلمة المرور
+      <input id="registerConfirmPassword" minlength="4" required="" type="password"/>
+     </label>
+     
+     <button class="gold-btn" type="submit">
+      إنشاء الحساب
+      <span>
+       ✦
+      </span>
+     </button>
+     <div class="form-message" id="registerMessage">
+     </div>
+    </form>
+   </section>
+   <a class="how-to-link" href="instructions.html" style="display:flex;align-items:center;justify-content:center;gap:10px;margin:18px auto 8px;padding:12px 22px;max-width:260px;border:1px solid #c99a3b;border-radius:14px;background:linear-gradient(135deg,#123b38,#071e22);color:#f3d27b;text-decoration:none;font-weight:700;box-shadow:0 5px 18px #0004">
+    📜 كيفية اللعب
+    <span aria-hidden="true">
+     ←
+    </span>
+   </a>
+   <p class="copyright">
+    Front-End Educational Game • مملكة الزمكان
+   </p>
+  </main>
+  <script>
+   (()=>{let started=false;function startSound(){if(started)return;started=true;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const settings=JSON.parse(localStorage.getItem("kingdom_settings")||"{}");if(settings.soundEffects===false&&settings.backgroundMusic===false)return;const ac=new C();if(ac.state==="suspended")ac.resume();if(settings.soundEffects!==false){const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.setValueAtTime(523,ac.currentTime);o.frequency.setValueAtTime(659,ac.currentTime+.12);g.gain.setValueAtTime(.0001,ac.currentTime);g.gain.exponentialRampToValueAtTime(.09,ac.currentTime+.03);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+.32);o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+.34)}}catch(e){}}window.addEventListener("pointerdown",startSound,{once:true});window.addEventListener("keydown",startSound,{once:true});window.addEventListener("load",()=>{try{if(!localStorage.getItem("kingdom_settings"))localStorage.setItem("kingdom_settings",JSON.stringify({soundEffects:true,backgroundMusic:true,volume:75,language:"ar"}))}catch(e){}})})();
+  </script>
+  <script src="audio.js"></script>
+  <script src="auth.js">
+  </script>
+ </body>
+</html>
+

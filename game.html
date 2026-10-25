@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   مملكة الزمكان | اللعب
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="game.css" rel="stylesheet"/>
+ <style>.question-counter{display:inline-flex;align-items:center;justify-content:center;margin:8px auto 12px;padding:7px 16px;border:1px solid rgba(255,210,100,.55);border-radius:999px;background:rgba(255,196,64,.12);color:#ffd66e;font-weight:800;font-size:.9rem}</style>
+</head>
+
+ <body class="game-body">
+  <div class="game-scene" id="scene">
+  </div>
+
+  <main class="game-shell">
+   <header class="game-top">
+    <button aria-label="إيقاف مؤقت" class="icon-btn pause-emblem" id="pauseButton">
+     Ⅱ
+    </button>
+
+    <div class="game-heading">
+     <span id="eraIcon">
+      𓂀
+     </span>
+     <div>
+      <h1 id="gameTitle">
+       العصر الفرعوني
+      </h1>
+      <p id="levelTitle">
+       المستوى الأول
+      </p>
+     </div>
+    </div>
+
+    <div class="game-actions">
+     <span class="score-emblem">
+      <span>
+       ✦
+      </span>
+      <b>
+       النتيجة
+      </b>
+      <strong id="scoreTopCount">
+       0
+      </strong>
+     </span>
+
+     <button aria-label="الإعدادات" class="icon-btn settings-emblem" id="gameSettingsButton">
+      ⚙
+     </button>
+     <span class="visually-hidden" id="gameCoins">
+      120
+     </span>
+     <span class="visually-hidden" id="gameStars">
+      0
+     </span>
+    </div>
+   </header>
+
+   <section class="game-main royal-game-layout">
+    <div class="play-column">
+     <section class="objective-panel">
+      <div class="moves-box">
+       <span>
+        عدد الحركات
+       </span>
+       <strong id="movesCount">
+        25
+       </strong>
+      </div>
+      <div class="score-box">
+       <span>
+        النقاط
+       </span>
+       <strong id="scoreCount">
+        0
+       </strong>
+      </div>
+
+      <div class="progress-box">
+       <div class="progress-head">
+        <b id="levelObjectiveShort">
+         أهداف المستوى
+        </b>
+        <span id="levelProgressText">
+         0%
+        </span>
+       </div>
+
+       <div class="progress-track">
+        <i id="levelProgressFill">
+        </i>
+       </div>
+      </div>
+     </section>
+
+     <section class="board-zone">
+      <div class="selected-goal-notice" id="selectedGoalNotice" aria-live="polite">
+       <span>🎯</span>
+       <strong id="selectedGoalName">اضغط على أي متطلب لمعرفة الهدف الذي اخترته</strong>
+      </div>
+      <div class="board-frame">
+       <div aria-hidden="true" class="wing-ornament">
+        ❧ ✦ ❧
+       </div>
+
+       <div aria-label="لوحة المطابقة" class="game-board" id="gameBoard">
+       </div>
+      </div>
+
+      <div class="booster-row">
+       <button class="booster" id="royalSealBooster">
+        <img src="assets/images/icons/royal-seal.png"/>
+        <span>
+         الختم الملكي
+        </span>
+        <b id="royalSealCount">
+         2
+        </b>
+       </button>
+
+       <button class="booster" id="extraMovesBooster">
+        <img src="assets/images/icons/extra-moves.png"/>
+        <span>
+         زيادة الحركات
+        </span>
+        <b id="extraMovesCount">
+         2
+        </b>
+       </button>
+
+       <button class="booster" id="gemPowerBooster">
+        <img src="assets/images/icons/gem-power.png"/>
+        <span>
+         قوة الجواهر
+        </span>
+        <b id="gemPowerCount">
+         2
+        </b>
+       </button>
+
+       <button class="booster" id="compassBooster">
+        <img src="assets/images/icons/compass.png"/>
+        <span>
+         البوصلة
+        </span>
+        <b id="compassCount">
+         2
+        </b>
+       </button>
+      </div>
+     </section>
+    </div>
+
+    <aside class="level-goals-panel">
+     <div class="goals-wing">
+      ❧  ❧
+     </div>
+     <h2>
+      أهداف المستوى
+     </h2>
+     <p class="goal-subtitle">
+      اجمع الرموز المطلوبة قبل نفاد الحركات
+     </p>
+     <div class="goal-card" id="goalCard1">
+      <span class="goal-symbol" id="goal1Symbol">
+       ☥
+      </span>
+      <span id="goal1Label">
+       مفتاح الحياة
+      </span>
+      <b>
+       <i id="goal1Current">
+        0
+       </i>
+       /
+       <i id="goal1Target">
+        8
+       </i>
+      </b>
+     </div>
+
+     <div class="goal-card" id="goalCard2">
+      <span class="goal-symbol" id="goal2Symbol">
+       𓆣
+      </span>
+      <span id="goal2Label">
+       الجعران
+      </span>
+      <b>
+       <i id="goal2Current">
+        0
+       </i>
+       /
+       <i id="goal2Target">
+        6
+       </i>
+      </b>
+     </div>
+
+     <div class="goal-card" id="goalCard3">
+      <span class="goal-symbol" id="goal3Symbol">
+       𓂀
+      </span>
+      <span id="goal3Label">
+       عين حورس
+      </span>
+      <b>
+       <i id="goal3Current">
+        0
+       </i>
+       /
+       <i id="goal3Target">
+        10
+       </i>
+      </b>
+     </div>
+
+     <div class="moves-medallion">
+      <span>
+       ✥
+      </span>
+      <div>
+       <small>
+        الحركات المتبقية
+       </small>
+       <strong id="movesPanelCount">
+        25
+       </strong>
+      </div>
+     </div>
+    </aside>
+
+    <section class="question-station">
+     <div>
+      <span class="eyebrow">
+       محطة الأسئلة والمعلومات
+      </span>
+      <h2>
+       اجمع الرموز لتكشف أسرار التاريخ 📜
+      </h2>
+      <p>
+       بعد إكمال الهدف ستظهر لك محطة السؤال.
+      </p>
+     </div>
+
+     <button class="gold-btn" disabled="" id="openQuestionButton">
+      افتح السؤال
+     </button>
+    </section>
+   </section>
+  </main>
+
+  <div class="modal" id="questionModal">
+   <div class="modal-card question-card">
+    <button class="close-modal" data-close="questionModal">
+     ×
+    </button>
+    <div class="question-head">
+     <img id="questionCharacterImage" src="assets/images/characters/alexander.jpg"/>
+     <div>
+      <span class="eyebrow">
+       محطة الأسئلة والمعلومات
+      </span>
+      <h2 id="questionCharacterName">
+       الشخصية
+      </h2>
+      <p id="questionCharacterEra">
+       العصر
+      </p>
+     </div>
+    </div>
+    <div class="question-counter" id="questionCounter">السؤال 1 من 3</div>
+    <h3 id="questionText">
+    </h3>
+    <div class="answers" id="questionOptions">
+    </div>
+    <div class="answer-feedback" id="answerFeedback">
+     <div id="feedbackIcon">
+     </div>
+     <div>
+      <strong id="feedbackTitle">
+      </strong>
+      <p id="feedbackText">
+      </p>
+     </div>
+    </div>
+    <button class="outline-btn" id="closeQuestionModal">
+     إغلاق
+    </button>
+   </div>
+  </div>
+  <div class="modal" id="correctModal">
+   <div class="modal-card result correct">
+    <div class="result-icon">
+     ✓
+    </div>
+    <span class="eyebrow">
+     إجابة صحيحة
+    </span>
+    <h2>
+     ممتاز! 👑
+    </h2>
+    <img id="unlockedCharacterImage" src=""/>
+    <h3 id="unlockedCharacterName">
+    </h3>
+    <p id="unlockedCharacterInfo">
+    </p>
+    <button class="gold-btn" id="nextLevelButton">
+     تابع الرحلة ←
+    </button>
+   </div>
+  </div>
+  <div class="modal" id="wrongModal">
+   <div class="modal-card result wrong">
+    <div class="result-icon">
+     ×
+    </div>
+    <span class="eyebrow">
+     إجابة غير صحيحة
+    </span>
+    <h2>
+     حاول مرة أخرى
+    </h2>
+    <p id="wrongAnswerText">
+    </p>
+    <div class="history-tip">
+     💡
+     <b>
+      معلومة:
+     </b>
+     <span id="historicalTip">
+     </span>
+    </div>
+    <button class="gold-btn" id="retryQuestionButton">
+     إعادة السؤال
+    </button>
+   </div>
+  </div>
+  <div class="modal" id="levelCompleteModal">
+   <div class="modal-card result complete">
+    <div class="result-icon">
+     ♛
+    </div>
+    <span class="eyebrow">
+     تم إكمال المستوى
+    </span>
+    <h2>
+     انتصار تاريخي!
+    </h2>
+    <div class="complete-stats">
+     <div>
+      ⭐
+      <b id="finalScore">
+       0
+      </b>
+      <small>
+       النقاط
+      </small>
+     </div>
+     <div>
+      🪙
+      <b id="finalCoins">
+       0
+      </b>
+      <small>
+       العملات
+      </small>
+     </div>
+     <div>
+      👣
+      <b id="finalMoves">
+       0
+      </b>
+      <small>
+       الحركات المتبقية
+      </small>
+     </div>
+    </div>
+    <button class="gold-btn" id="continueAfterWin">
+     محطة الأسئلة ←
+    </button>
+    <button class="outline-btn" id="backToMapAfterWin">
+     العودة للخريطة
+    </button>
+   </div>
+  </div>
+  <div class="modal" id="pauseModal">
+   <div class="modal-card compact">
+    <div class="result-icon">
+     Ⅱ
+    </div>
+    <h2>
+     اللعبة متوقفة
+    </h2>
+    <button class="gold-btn" id="resumeGameButton">
+     استمرار
+    </button>
+    <a class="outline-btn" href="map.html">
+     الخريطة
+    </a>
+   </div>
+  </div>
+  <div class="modal" id="gameSettingsModal">
+   <div class="modal-card compact">
+    <button class="close-modal" data-close="gameSettingsModal">
+     ×
+    </button>
+    <h2>
+     إعدادات اللعب ⚙
+    </h2>
+    <label class="switch-row">
+     المؤثرات
+     <input checked="" id="gameSoundEffects" type="checkbox"/>
+    </label>
+    <label class="switch-row">
+     الموسيقى
+     <input checked="" id="gameMusic" type="checkbox"/>
+    </label>
+    <button class="gold-btn" id="closeGameSettings">
+     تم
+    </button>
+   </div>
+  </div>
+  <div class="toast" id="toast">
+  </div>
+  
+  <script src="audio.js"></script>
+  <script src="game.js">
+  </script>
+ </body>
+</html>
+
